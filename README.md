@@ -7,10 +7,10 @@
 把内核、矿池、显卡调校和收益估算，放进一个 Windows 窗口。
 
 ![Windows x64](https://img.shields.io/badge/Windows-x64-0078D4?style=flat-square)
-![Version](https://img.shields.io/badge/版本-v0.2.13_测试版-33BFA0?style=flat-square)
+![Version](https://img.shields.io/badge/版本-v0.2.14_测试版-33BFA0?style=flat-square)
 ![PRL](https://img.shields.io/badge/PRL-PearlHash-7189FF?style=flat-square)
 
-**[下载程序](./疯狂的珍珠-0.2.13.exe?raw=true)** · **[下载初始配置](./settings.json?raw=true)** · **[下载计时文件](./fee-ledger.json?raw=true)**
+**[下载程序](./疯狂的珍珠-0.2.14.exe?raw=true)** · **[下载初始配置](./settings.json?raw=true)** · **[下载计时文件](./fee-ledger.json?raw=true)**
 
 [快速上手](#快速上手) · [功能一览](#功能一览) · [常用设置](#常用设置) · [目录与升级](#目录与升级)
 
@@ -19,6 +19,14 @@
 ---
 
 开挖要找内核、写配置；跑起来还要盯算力、查掉线、看温度。**疯狂的珍珠把这些日常操作收在同一个界面里。** 选好内核，填好收款账户和矿池，就能开始管理矿机。参数自动保存，下次打开继续用。
+
+## v0.2.14 更新
+
+- **换电脑、换显卡直接识别**：开挖时重新检测本机显卡。旧机器的离线调校记录不会阻止启动，也不会把旧卡的功率、频率或算力基准套到新卡上；设备编号改变时清除旧的编号选择。
+- **切换内核更顺畅**：PeakMiner 与 BzMiner 分别读取各自的统计接口；暖机期间自动等待、逐步重试，持续异常和恢复各记一次日志，减少重复提示。
+- **BzMiner 连接更明确**：显式启用本机统计接口，官方下载优先完整版本，避免误选需要另配插件的精简包。
+
+升级保留自己的配置、内核目录和计时文件，只更换 EXE。更换硬件后，请按当前显卡重新确认调校参数；支持哪些显卡仍以所选内核为准。
 
 ## 为什么用疯狂的珍珠
 
@@ -51,7 +59,7 @@
 
 | 文件 | 下载 | 用途 |
 | :--- | :---: | :--- |
-| **疯狂的珍珠-0.2.13.exe** | [下载程序](./疯狂的珍珠-0.2.13.exe?raw=true) | 主程序 |
+| **疯狂的珍珠-0.2.14.exe** | [下载程序](./疯狂的珍珠-0.2.14.exe?raw=true) | 主程序 |
 | **settings.json** | [下载配置](./settings.json?raw=true) | 空白初始配置，使用后自动保存参数 |
 | **fee-ledger.json** | [下载计时文件](./fee-ledger.json?raw=true) | 初始累计计时 |
 
@@ -124,7 +132,7 @@
 
 ```text
 疯狂的珍珠/
-├─ 疯狂的珍珠-0.2.13.exe
+├─ 疯狂的珍珠-0.2.14.exe
 ├─ README.md
 ├─ settings.json       自动保存的配置
 ├─ fee-ledger.json     累计计时
