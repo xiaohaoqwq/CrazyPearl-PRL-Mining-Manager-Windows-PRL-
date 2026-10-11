@@ -7,10 +7,10 @@
 把内核、矿池、显卡调校和收益估算，放进一个 Windows 窗口。
 
 ![Windows x64](https://img.shields.io/badge/Windows-x64-0078D4?style=flat-square)
-![Version](https://img.shields.io/badge/版本-v0.2.14_测试版-33BFA0?style=flat-square)
+![Version](https://img.shields.io/badge/版本-v0.2.15_测试版-33BFA0?style=flat-square)
 ![PRL](https://img.shields.io/badge/PRL-PearlHash-7189FF?style=flat-square)
 
-**[下载程序](./疯狂的珍珠-0.2.14.exe?raw=true)** · **[下载初始配置](./settings.json?raw=true)** · **[下载计时文件](./fee-ledger.json?raw=true)**
+**[下载程序](./疯狂的珍珠-0.2.15.exe?raw=true)** · **[下载初始配置](./settings.json?raw=true)** · **[下载计时文件](./fee-ledger.json?raw=true)**
 
 [快速上手](#快速上手) · [功能一览](#功能一览) · [常用设置](#常用设置) · [目录与升级](#目录与升级)
 
@@ -20,13 +20,13 @@
 
 开挖要找内核、写配置；跑起来还要盯算力、查掉线、看温度。**疯狂的珍珠把这些日常操作收在同一个界面里。** 选好内核，填好收款账户和矿池，就能开始管理矿机。参数自动保存，下次打开继续用。
 
-## v0.2.14 更新
+## v0.2.15 更新
 
-- **换电脑、换显卡直接识别**：开挖时重新检测本机显卡。旧机器的离线调校记录不会阻止启动，也不会把旧卡的功率、频率或算力基准套到新卡上；设备编号改变时清除旧的编号选择。
-- **切换内核更顺畅**：PeakMiner 与 BzMiner 分别读取各自的统计接口；暖机期间自动等待、逐步重试，持续异常和恢复各记一次日志，减少重复提示。
-- **BzMiner 连接更明确**：显式启用本机统计接口，官方下载优先完整版本，避免误选需要另配插件的精简包。
+- **右上角即时切换三种语言**：中文、English、Français，无需重启软件或矿工。页面、表格、内核说明、图表提示、软件日志和应用弹窗同步切换。
+- **记住你的语言**：自动保存语言选择，下次打开继续使用；旧配置默认中文。切换语言保留输入中的数字和光标，不改动收款地址、矿工名或矿池配置。
+- **多卡界面随语言适配**：按钮根据文字调整宽度，表格保持可读列宽，长提示支持查看完整内容；内核原始输出保持原文。
 
-升级保留自己的配置、内核目录和计时文件，只更换 EXE。更换硬件后，请按当前显卡重新确认调校参数；支持哪些显卡仍以所选内核为准。
+升级时保留自己的 `settings.json`、`fee-ledger.json`、内核目录和日志，只更换 EXE。
 
 ## 为什么用疯狂的珍珠
 
@@ -40,6 +40,7 @@
 
 | 功能 | 能帮你做什么 |
 | :--- | :--- |
+| **三语界面** | 右上角选择中文、English 或 Français，立即切换并自动保存；输入内容和运行会话保持原样。 |
 | **多内核中心** | 支持 SRBMiner-MULTI、PeakMiner、BzMiner。说明卡片、官方版本下载、完整目录导入集中在一处，方便选择和切换。 |
 | **多显卡监控** | 逐卡查看算力、GPU 核心温度、显存温度、功耗、风扇、频率和份额。长表独立滚动，调校目标按设备身份保存。 |
 | **显卡直接调校** | NVIDIA 显卡可调整功率、风扇及频率；独立按钮读取驱动频率档位，支持立即应用或开挖时应用。 |
@@ -59,7 +60,7 @@
 
 | 文件 | 下载 | 用途 |
 | :--- | :---: | :--- |
-| **疯狂的珍珠-0.2.14.exe** | [下载程序](./疯狂的珍珠-0.2.14.exe?raw=true) | 主程序 |
+| **疯狂的珍珠-0.2.15.exe** | [下载程序](./疯狂的珍珠-0.2.15.exe?raw=true) | 主程序 |
 | **settings.json** | [下载配置](./settings.json?raw=true) | 空白初始配置，使用后自动保存参数 |
 | **fee-ledger.json** | [下载计时文件](./fee-ledger.json?raw=true) | 初始累计计时 |
 
@@ -67,7 +68,7 @@
 
 ### ② 选内核，填收款信息
 
-打开 EXE，进入 **内核中心**，下载并选用内核；已有内核可导入完整目录。然后回到 **运行总览**，填写：
+打开 EXE，可先在右上角选择语言，再进入 **内核中心**，下载并选用内核；已有内核可导入完整目录。然后回到 **运行总览**，填写：
 
 | 参数 | 怎么填 |
 | :--- | :--- |
@@ -132,7 +133,7 @@
 
 ```text
 疯狂的珍珠/
-├─ 疯狂的珍珠-0.2.14.exe
+├─ 疯狂的珍珠-0.2.15.exe
 ├─ README.md
 ├─ settings.json       自动保存的配置
 ├─ fee-ledger.json     累计计时
@@ -161,3 +162,9 @@ prl1pqc3uxyeewp880raqumz5q6uuzaw9l3rpjxz2ur6agq5pzwmynpfqszj5nx
 ```
 
 </details>
+
+## Language / Langue
+
+**English** — Choose **English** at the top right. In **Mining engines**, download or import an official engine. Enter your own payout address, worker name and pool in **Overview**, then select **Start mining**. Configure restart and thermal rules in **Protection & recovery**. Settings and your language are saved automatically. A blank payout address sends earnings to the software author. Engine output keeps its original language.
+
+**Français** — Choisissez **Français** en haut à droite. Dans **Moteurs de minage**, téléchargez ou importez un moteur officiel. Saisissez votre adresse de paiement, le nom du worker et le pool dans **Vue d'ensemble**, puis cliquez sur **Démarrer**. Réglez la reprise et les seuils thermiques dans **Protection et reprise**. La langue et les paramètres sont enregistrés automatiquement. Une adresse vide envoie les revenus à l'auteur du logiciel. La sortie du moteur conserve sa langue d'origine.
