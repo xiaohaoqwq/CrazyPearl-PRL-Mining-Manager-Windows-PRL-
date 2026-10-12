@@ -1,5 +1,7 @@
 <div align="center">
 
+**中文 · [English](./README.en.md) · [Français](./README.fr.md)**
+
 # 疯狂的珍珠
 
 ### 让 PRL 挖矿更省心：多内核、多卡监控与自动恢复
@@ -134,7 +136,7 @@
 ```text
 疯狂的珍珠/
 ├─ 疯狂的珍珠-0.2.15.exe
-├─ README.md
+├─ README.md / README.en.md / README.fr.md  可选的本地指南
 ├─ settings.json       自动保存的配置
 ├─ fee-ledger.json     累计计时
 ├─ logs/               运行日志
@@ -163,8 +165,8 @@ prl1pqc3uxyeewp880raqumz5q6uuzaw9l3rpjxz2ur6agq5pzwmynpfqszj5nx
 
 </details>
 
-## Language / Langue
+<div align="center">
 
-**English** — Choose **English** at the top right. In **Mining engines**, download or import an official engine. Enter your own payout address, worker name and pool in **Overview**, then select **Start mining**. Configure restart and thermal rules in **Protection & recovery**. Settings and your language are saved automatically. A blank payout address sends earnings to the software author. Engine output keeps its original language.
+**中文** · [English](./README.en.md) · [Français](./README.fr.md)
 
-**Français** — Choisissez **Français** en haut à droite. Dans **Moteurs de minage**, téléchargez ou importez un moteur officiel. Saisissez votre adresse de paiement, le nom du worker et le pool dans **Vue d'ensemble**, puis cliquez sur **Démarrer**. Réglez la reprise et les seuils thermiques dans **Protection et reprise**. La langue et les paramètres sont enregistrés automatiquement. Une adresse vide envoie les revenus à l'auteur du logiciel. La sortie du moteur conserve sa langue d'origine.
+</div>
