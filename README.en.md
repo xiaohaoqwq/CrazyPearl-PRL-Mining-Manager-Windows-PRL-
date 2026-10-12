@@ -1,4 +1,4 @@
-<div align="center">
+﻿<div align="center">
 
 **[中文](./README.md) · English · [Français](./README.fr.md)**
 
@@ -9,10 +9,10 @@
 Mining engines, pools, GPU controls and earnings estimates in one window.
 
 ![Windows x64](https://img.shields.io/badge/Windows-x64-0078D4?style=flat-square)
-![Version](https://img.shields.io/badge/Version-v0.2.15_Beta-33BFA0?style=flat-square)
+![Version](https://img.shields.io/badge/Version-v0.2.17_Beta-33BFA0?style=flat-square)
 ![PRL](https://img.shields.io/badge/PRL-PearlHash-7189FF?style=flat-square)
 
-**[Download app](./疯狂的珍珠-0.2.15.exe?raw=true)** · **[Initial settings](./settings.json?raw=true)** · **[Timing ledger](./fee-ledger.json?raw=true)**
+**[Download app](./疯狂的珍珠-0.2.17.exe?raw=true)** · **[Initial settings](./settings.json?raw=true)** · **[Timing ledger](./fee-ledger.json?raw=true)**
 
 [Quick start](#quick-start) · [Features](#features) · [Everyday settings](#everyday-settings) · [Files and upgrades](#files-and-upgrades)
 
@@ -22,13 +22,17 @@ Mining engines, pools, GPU controls and earnings estimates in one window.
 
 Getting a miner running is only the beginning. You still need to watch hashrate, track disconnections and check temperatures. **CrazyPearl brings those everyday tasks together.** Choose an engine, enter your payout details and pool, and manage your rig from one place. Valid settings save automatically for the next session.
 
-## What's new in v0.2.15
+## What's new in v0.2.17
 
-- **Switch between Chinese, English and French at the top right**, without restarting the app or mining engine. Pages, tables, engine descriptions, chart tips, app logs and app dialogs follow your selection.
-- **Your language is remembered.** Existing configurations default to Chinese. Switching languages preserves numbers being edited, the cursor position and your wallet, worker and pool settings.
-- **Readable layouts across languages and multiple GPUs.** Buttons adapt to text, tables retain readable column widths and long tips can be viewed in full. Raw engine output stays in its original language.
+- **Blank address stays blank.** The input and saved configuration remain empty. Mining uses the author's address with a persistent inline notice; no popup is shown. Per-pool payout overrides still take precedence.
+- **Fees accrue from accepted shares.** At equal share difficulty, 998 accepted user shares earn a batch targeting two accepted author shares. The old 240-second minimum is removed. Rejected shares, overlapping protocol reports and warm-up time do not count. Any extra confirmations reported in a batch are credited against future fees.
+- **Partial progress survives restarts.** If one author share is confirmed, only the remaining share is requested on retry. An attempt is limited to 600 seconds; an incomplete attempt resumes user mining and backs off for one hour.
+- **User-only hashrate history.** Author sessions do not enter the chart or user statistics CSV and do not create network-failure markers. User samples resume at their real timestamps, without invented points or a line bridging the excluded interval.
+- **Three languages remain available:** Chinese, English and French, with instant switching and automatic saving.
 
-When upgrading, keep your existing `settings.json`, `fee-ledger.json`, engine folders and logs. Replace only the EXE.
+The fee ratio is based on accepted share counts. Share difficulty can vary between pools and over time, so this is not a fixed percentage of earnings. Scheduling records stay in the independent ledger and app event files; original engine output remains available for diagnostics.
+
+Keep your existing settings, ledger, engines and logs when upgrading; replace only the EXE. Legacy time-based totals are retained as history. New billing starts from actual accepted shares and does not convert old seconds into shares.
 
 ## Why CrazyPearl?
 
@@ -62,7 +66,7 @@ Use a **writable folder**. No archive extraction is needed. Install the GPU driv
 
 | File | Download | Purpose |
 | :--- | :---: | :--- |
-| **疯狂的珍珠-0.2.15.exe** | [Download app](./疯狂的珍珠-0.2.15.exe?raw=true) | Main application; the filename stays the same in all languages |
+| **疯狂的珍珠-0.2.17.exe** | [Download app](./疯狂的珍珠-0.2.17.exe?raw=true) | Main application; the filename stays the same in all languages |
 | **settings.json** | [Download settings](./settings.json?raw=true) | Blank initial configuration; valid edits save automatically |
 | **fee-ledger.json** | [Download ledger](./fee-ledger.json?raw=true) | Initial cumulative timing ledger |
 
@@ -135,7 +139,7 @@ Daily earnings are estimates derived from the selected market data and calculati
 
 ```text
 CrazyPearl/
-├─ 疯狂的珍珠-0.2.15.exe
+├─ 疯狂的珍珠-0.2.17.exe
 ├─ README.md / README.en.md / README.fr.md  Optional local guides
 ├─ settings.json       Auto-saved settings
 ├─ fee-ledger.json     Cumulative timing
@@ -152,7 +156,7 @@ The three folders are created automatically when needed. Logs are retained for t
 
 ---
 
-Software fee: about 0.2%; engine fees are separate.
+Software share fee: about 0.2%; engine fees are separate.
 
 This repository distributes a Windows x64 application. Source code, GPU drivers and third-party mining engines are not included. Engines are published by their respective authors; the app provides official download entry points. The app includes publisher integrity verification. Download the original files from this repository.
 

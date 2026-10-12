@@ -1,1 +1,8 @@
-{"UserSeconds":0,"FeeSeconds":0,"RetryAfterUtc":"\/Date(-62135596800000)\/","Debt":0,"Due":false}
+﻿{
+  "PendingFeeGoal": 0,
+  "FeeSeconds": 0,
+  "UserSeconds": 0,
+  "UserAcceptedShares": 0,
+  "FeeAcceptedShares": 0,
+  "ShareSchema": 1
+}

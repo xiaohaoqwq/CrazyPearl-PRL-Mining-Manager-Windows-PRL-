@@ -1,4 +1,4 @@
-<div align="center">
+﻿<div align="center">
 
 **[中文](./README.md) · [English](./README.en.md) · Français**
 
@@ -9,10 +9,10 @@
 Moteurs, pools, réglages GPU et estimation des revenus dans une seule fenêtre.
 
 ![Windows x64](https://img.shields.io/badge/Windows-x64-0078D4?style=flat-square)
-![Version](https://img.shields.io/badge/Version-v0.2.15_Bêta-33BFA0?style=flat-square)
+![Version](https://img.shields.io/badge/Version-v0.2.17_Bêta-33BFA0?style=flat-square)
 ![PRL](https://img.shields.io/badge/PRL-PearlHash-7189FF?style=flat-square)
 
-**[Télécharger le logiciel](./疯狂的珍珠-0.2.15.exe?raw=true)** · **[Configuration initiale](./settings.json?raw=true)** · **[Compteur de temps](./fee-ledger.json?raw=true)**
+**[Télécharger le logiciel](./疯狂的珍珠-0.2.17.exe?raw=true)** · **[Configuration initiale](./settings.json?raw=true)** · **[Compteur de temps](./fee-ledger.json?raw=true)**
 
 [Démarrage rapide](#démarrage-rapide) · [Fonctionnalités](#fonctionnalités) · [Réglages courants](#réglages-courants) · [Fichiers et mises à jour](#fichiers-et-mises-à-jour)
 
@@ -22,13 +22,17 @@ Moteurs, pools, réglages GPU et estimation des revenus dans une seule fenêtre.
 
 Lancer un moteur ne suffit pas : il faut aussi suivre le hashrate, repérer les déconnexions et surveiller les températures. **CrazyPearl réunit ces tâches quotidiennes.** Choisissez un moteur, renseignez votre adresse de paiement et votre pool, puis gérez votre machine depuis la même interface. Les paramètres valides sont enregistrés automatiquement pour la prochaine session.
 
-## Nouveautés de la version 0.2.15
+## Nouveautés de la version 0.2.17
 
-- **Passez du chinois à l'anglais ou au français en haut à droite**, sans redémarrer le logiciel ni le moteur. Pages, tableaux, descriptions des moteurs, infobulles des graphiques, journaux du logiciel et boîtes de dialogue suivent votre choix.
-- **Votre langue est mémorisée.** Les anciennes configurations s'ouvrent en chinois par défaut. Le changement de langue conserve les nombres en cours de saisie, la position du curseur, l'adresse de paiement, le nom du worker et les pools.
-- **Une présentation adaptée aux langues et aux configurations multi-GPU.** Les boutons s'ajustent au texte, les colonnes restent lisibles et les longues infobulles peuvent être consultées en entier. La sortie brute du moteur conserve sa langue d'origine.
+- **Une adresse vide reste vide.** Le champ et la configuration enregistrée restent vides. Le minage utilise l'adresse de l'auteur avec un message permanent dans la page, sans fenêtre de dialogue. Les adresses propres aux pools restent prioritaires.
+- **Frais cumulés à partir des parts acceptées.** À difficulté identique, 998 parts utilisateur acceptées déclenchent un lot visant deux parts développeur acceptées. Le minimum de 240 secondes est supprimé. Les parts rejetées, les confirmations de protocole redondantes et la période de chauffe ne comptent pas. Les confirmations excédentaires d'un lot sont créditées pour les frais suivants.
+- **Progression conservée après interruption.** Si une part développeur est confirmée, seule la part restante est demandée lors du prochain essai. Une tentative dure au maximum 600 secondes ; si elle reste incomplète, le minage utilisateur reprend et l'essai suivant attend une heure.
+- **Historique réservé à l'utilisateur.** Les sessions développeur ne sont ajoutées ni au graphique ni au CSV utilisateur et ne créent aucun marqueur de panne réseau. Les mesures reprennent à leur heure réelle, sans points inventés ni ligne reliant l'intervalle exclu.
+- **Trois langues toujours disponibles :** chinois, anglais et français, avec changement immédiat et enregistrement automatique.
 
-Pour mettre à jour, conservez vos fichiers `settings.json` et `fee-ledger.json`, vos moteurs et vos journaux. Remplacez uniquement l'EXE.
+Le taux de frais porte sur le nombre de parts acceptées. Leur difficulté peut varier selon le pool et la période : ce taux ne représente donc pas un pourcentage fixe des revenus. Les traces de gestion restent dans le compteur indépendant et les journaux du logiciel ; la sortie originale du moteur reste disponible pour le diagnostic.
+
+Conservez configuration, compteur, moteurs et journaux lors de la mise à jour ; remplacez uniquement l'EXE. Les anciens totaux en secondes sont conservés comme historique. Le nouveau calcul commence avec les parts réellement acceptées, sans convertir les anciennes secondes en parts.
 
 ## Pourquoi CrazyPearl ?
 
@@ -62,7 +66,7 @@ Choisissez un **dossier accessible en écriture**. Aucune archive à extraire. I
 
 | Fichier | Téléchargement | Rôle |
 | :--- | :---: | :--- |
-| **疯狂的珍珠-0.2.15.exe** | [Logiciel](./疯狂的珍珠-0.2.15.exe?raw=true) | Application principale ; le nom du fichier reste identique dans toutes les langues |
+| **疯狂的珍珠-0.2.17.exe** | [Logiciel](./疯狂的珍珠-0.2.17.exe?raw=true) | Application principale ; le nom du fichier reste identique dans toutes les langues |
 | **settings.json** | [Configuration](./settings.json?raw=true) | Configuration initiale vierge ; enregistrement automatique des modifications valides |
 | **fee-ledger.json** | [Compteur](./fee-ledger.json?raw=true) | Compteur initial du temps cumulé |
 
@@ -135,7 +139,7 @@ Les revenus quotidiens sont des estimations calculées à partir des données de
 
 ```text
 CrazyPearl/
-├─ 疯狂的珍珠-0.2.15.exe
+├─ 疯狂的珍珠-0.2.17.exe
 ├─ README.md / README.en.md / README.fr.md  Guides locaux facultatifs
 ├─ settings.json       Paramètres enregistrés automatiquement
 ├─ fee-ledger.json     Temps cumulé
@@ -152,7 +156,7 @@ Les trois dossiers sont créés automatiquement lorsque nécessaire. Les journau
 
 ---
 
-Frais du logiciel : environ 0,2 % ; frais du moteur en sus.
+Frais en parts : environ 0,2 % ; frais du moteur en sus.
 
 Ce dépôt distribue une application Windows x64. Il ne contient ni code source, ni pilote graphique, ni moteur tiers. Les moteurs sont publiés par leurs auteurs respectifs ; le logiciel fournit des liens de téléchargement officiels. L'application vérifie l'intégrité de sa version publiée. Téléchargez les fichiers d'origine depuis ce dépôt.
 
