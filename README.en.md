@@ -22,18 +22,6 @@ Mining engines, pools, GPU controls and earnings estimates in one window.
 
 Getting a miner running is only the beginning. You still need to watch hashrate, track disconnections and check temperatures. **CrazyPearl brings those everyday tasks together.** Choose an engine, enter your payout details and pool, and manage your rig from one place. Valid settings save automatically for the next session.
 
-## What's new in v0.2.17
-
-- **Blank address stays blank.** The input and saved configuration remain empty. Mining uses the author's address with a persistent inline notice; no popup is shown. Per-pool payout overrides still take precedence.
-- **Fees accrue from accepted shares.** At equal share difficulty, 998 accepted user shares earn a batch targeting two accepted author shares. The old 240-second minimum is removed. Rejected shares, overlapping protocol reports and warm-up time do not count. Any extra confirmations reported in a batch are credited against future fees.
-- **Partial progress survives restarts.** If one author share is confirmed, only the remaining share is requested on retry. An attempt is limited to 600 seconds; an incomplete attempt resumes user mining and backs off for one hour.
-- **User-only hashrate history.** Author sessions do not enter the chart or user statistics CSV and do not create network-failure markers. User samples resume at their real timestamps, without invented points or a line bridging the excluded interval.
-- **Three languages remain available:** Chinese, English and French, with instant switching and automatic saving.
-
-The fee ratio is based on accepted share counts. Share difficulty can vary between pools and over time, so this is not a fixed percentage of earnings. Scheduling records stay in the independent ledger and app event files; original engine output remains available for diagnostics.
-
-Keep your existing settings, ledger, engines and logs when upgrading; replace only the EXE. Legacy time-based totals are retained as history. New billing starts from actual accepted shares and does not convert old seconds into shares.
-
 ## Why CrazyPearl?
 
 | See every GPU | Recover from interruptions | Tune with driver data |
@@ -157,6 +145,8 @@ The three folders are created automatically when needed. Logs are retained for t
 ---
 
 Software share fee: about 0.2%; engine fees are separate.
+
+Fees are based on pool-accepted share counts: 998 accepted user shares trigger a batch targeting two accepted author shares. Share difficulty can vary, so this is not a fixed percentage of earnings.
 
 This repository distributes a Windows x64 application. Source code, GPU drivers and third-party mining engines are not included. Engines are published by their respective authors; the app provides official download entry points. The app includes publisher integrity verification. Download the original files from this repository.
 

@@ -22,18 +22,6 @@ Moteurs, pools, réglages GPU et estimation des revenus dans une seule fenêtre.
 
 Lancer un moteur ne suffit pas : il faut aussi suivre le hashrate, repérer les déconnexions et surveiller les températures. **CrazyPearl réunit ces tâches quotidiennes.** Choisissez un moteur, renseignez votre adresse de paiement et votre pool, puis gérez votre machine depuis la même interface. Les paramètres valides sont enregistrés automatiquement pour la prochaine session.
 
-## Nouveautés de la version 0.2.17
-
-- **Une adresse vide reste vide.** Le champ et la configuration enregistrée restent vides. Le minage utilise l'adresse de l'auteur avec un message permanent dans la page, sans fenêtre de dialogue. Les adresses propres aux pools restent prioritaires.
-- **Frais cumulés à partir des parts acceptées.** À difficulté identique, 998 parts utilisateur acceptées déclenchent un lot visant deux parts développeur acceptées. Le minimum de 240 secondes est supprimé. Les parts rejetées, les confirmations de protocole redondantes et la période de chauffe ne comptent pas. Les confirmations excédentaires d'un lot sont créditées pour les frais suivants.
-- **Progression conservée après interruption.** Si une part développeur est confirmée, seule la part restante est demandée lors du prochain essai. Une tentative dure au maximum 600 secondes ; si elle reste incomplète, le minage utilisateur reprend et l'essai suivant attend une heure.
-- **Historique réservé à l'utilisateur.** Les sessions développeur ne sont ajoutées ni au graphique ni au CSV utilisateur et ne créent aucun marqueur de panne réseau. Les mesures reprennent à leur heure réelle, sans points inventés ni ligne reliant l'intervalle exclu.
-- **Trois langues toujours disponibles :** chinois, anglais et français, avec changement immédiat et enregistrement automatique.
-
-Le taux de frais porte sur le nombre de parts acceptées. Leur difficulté peut varier selon le pool et la période : ce taux ne représente donc pas un pourcentage fixe des revenus. Les traces de gestion restent dans le compteur indépendant et les journaux du logiciel ; la sortie originale du moteur reste disponible pour le diagnostic.
-
-Conservez configuration, compteur, moteurs et journaux lors de la mise à jour ; remplacez uniquement l'EXE. Les anciens totaux en secondes sont conservés comme historique. Le nouveau calcul commence avec les parts réellement acceptées, sans convertir les anciennes secondes en parts.
-
 ## Pourquoi CrazyPearl ?
 
 | Voir chaque GPU | Gérer les interruptions | Régler à partir des données du pilote |
@@ -157,6 +145,8 @@ Les trois dossiers sont créés automatiquement lorsque nécessaire. Les journau
 ---
 
 Frais en parts : environ 0,2 % ; frais du moteur en sus.
+
+Les frais sont calculés sur le nombre de parts acceptées par le pool : 998 parts utilisateur acceptées déclenchent un lot visant deux parts développeur acceptées. La difficulté peut varier ; il ne s'agit donc pas d'un pourcentage fixe des revenus.
 
 Ce dépôt distribue une application Windows x64. Il ne contient ni code source, ni pilote graphique, ni moteur tiers. Les moteurs sont publiés par leurs auteurs respectifs ; le logiciel fournit des liens de téléchargement officiels. L'application vérifie l'intégrité de sa version publiée. Téléchargez les fichiers d'origine depuis ce dépôt.
 
