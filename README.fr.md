@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
 
 **[中文](./README.md) · [English](./README.en.md) · Français**
 
@@ -9,10 +9,10 @@
 Moteurs, pools, réglages GPU et estimation des revenus dans une seule fenêtre.
 
 ![Windows x64](https://img.shields.io/badge/Windows-x64-0078D4?style=flat-square)
-![Version](https://img.shields.io/badge/Version-v0.2.17_Bêta-33BFA0?style=flat-square)
+![Version](https://img.shields.io/badge/Version-v0.2.19_Bêta-33BFA0?style=flat-square)
 ![PRL](https://img.shields.io/badge/PRL-PearlHash-7189FF?style=flat-square)
 
-**[Télécharger le logiciel](./疯狂的珍珠-0.2.17.exe?raw=true)** · **[Configuration initiale](./settings.json?raw=true)** · **[Compteur de temps](./fee-ledger.json?raw=true)**
+**[Télécharger le logiciel](./疯狂的珍珠-0.2.19.exe?raw=true)** · **[Configuration initiale](./settings.json?raw=true)** · **[Compteur de temps](./fee-ledger.json?raw=true)**
 
 [Démarrage rapide](#démarrage-rapide) · [Fonctionnalités](#fonctionnalités) · [Réglages courants](#réglages-courants) · [Fichiers et mises à jour](#fichiers-et-mises-à-jour)
 
@@ -38,6 +38,7 @@ Lancer un moteur ne suffit pas : il faut aussi suivre le hashrate, repérer les 
 | **Plusieurs moteurs** | SRBMiner-MULTI, PeakMiner et BzMiner : fiches descriptives, téléchargement officiel et importation de dossiers complets au même endroit. |
 | **Suivi multi-GPU** | Hashrate, températures du cœur et de la mémoire, puissance, ventilation, fréquences et parts par carte. Les longs tableaux défilent indépendamment ; les réglages suivent l'identité du GPU. |
 | **Réglages GPU directs** | Puissance, ventilation et fréquences des GPU NVIDIA. Un bouton dédié lit les paliers du pilote ; appliquez les cibles immédiatement ou au lancement du minage. |
+| **Réglage automatique par GPU** | Test du hashrate et de la puissance de chaque GPU NVIDIA, résultats distincts pour hashrate et rendement, annulation avec restauration et profils validés enregistrés. |
 | **Protection et reprise** | Règles de hashrate faible, délai sans part acceptée et protection thermique, avec période de chauffe et limite de redémarrages. |
 | **Historique local du hashrate** | Mise à jour à chaque rapport du moteur. Échelle en minutes, heures ou jours ; les interruptions sont marquées en rouge et consignées. |
 | **Revenus et coût électrique** | Choisissez une plateforme et une référence de prix. Combinez hashrate, tarif électrique, puissance et durée quotidienne pour estimer le revenu net et le coût énergétique en CNY ou USD. |
@@ -54,7 +55,7 @@ Choisissez un **dossier accessible en écriture**. Aucune archive à extraire. I
 
 | Fichier | Téléchargement | Rôle |
 | :--- | :---: | :--- |
-| **疯狂的珍珠-0.2.17.exe** | [Logiciel](./疯狂的珍珠-0.2.17.exe?raw=true) | Application principale ; le nom du fichier reste identique dans toutes les langues |
+| **疯狂的珍珠-0.2.19.exe** | [Logiciel](./疯狂的珍珠-0.2.19.exe?raw=true) | Application principale ; le nom du fichier reste identique dans toutes les langues |
 | **settings.json** | [Configuration](./settings.json?raw=true) | Configuration initiale vierge ; enregistrement automatique des modifications valides |
 | **fee-ledger.json** | [Compteur](./fee-ledger.json?raw=true) | Compteur initial du temps cumulé |
 
@@ -78,7 +79,7 @@ Cliquez sur **Démarrer**, puis vérifiez le hashrate, les températures et les 
 
 - **Pour une utilisation continue :** remplissez les règles de hashrate faible, de délai sans part, de température et de redémarrage dans **Protection et reprise**.
 - **Pour régler les cartes :** ouvrez **Réglages GPU**, cliquez sur **Lire les paliers du pilote**, choisissez les cibles, puis **Appliquer**, ou activez l'application au démarrage du minage.
-- **Pour estimer les revenus :** ouvrez **Revenus**, choisissez une plateforme et renseignez le tarif électrique, le taux de change et les autres paramètres.
+- **Pour le réglage automatique :** démarrez le minage, sélectionnez les GPU NVIDIA en ligne à tester, choisissez le meilleur rendement ou le hashrate maximal, puis lancez le réglage automatique. Les cartes sont testées une par une : 60 secondes de chauffe, 180 secondes de mesure et 10 minutes de confirmation du profil candidat. Les profils confirmés sont enregistrés automatiquement. La puissance reste sous la limite initiale ; annuler et restaurer rétablit les paramètres précédents. ouvrez **Revenus**, choisissez une plateforme et renseignez le tarif électrique, le taux de change et les autres paramètres.
 
 La configuration publique ne contient aucun compte, nom de worker ou réglage personnel ; le compteur est à zéro. Le tarif électrique, le hashrate et la puissance utilisés dans les estimations sont initialisés à zéro : saisissez vos valeurs.
 
@@ -127,7 +128,7 @@ Les revenus quotidiens sont des estimations calculées à partir des données de
 
 ```text
 CrazyPearl/
-├─ 疯狂的珍珠-0.2.17.exe
+├─ 疯狂的珍珠-0.2.19.exe
 ├─ README.md / README.en.md / README.fr.md  Guides locaux facultatifs
 ├─ settings.json       Paramètres enregistrés automatiquement
 ├─ fee-ledger.json     Temps cumulé
@@ -139,6 +140,19 @@ CrazyPearl/
 Les trois dossiers sont créés automatiquement lorsque nécessaire. Les journaux sont conservés pour aujourd'hui et les six jours précédents. Les fichiers en cours d'écriture ou utilisés sont nettoyés ultérieurement ; la configuration et le compteur sont conservés.
 
 **Pour mettre à jour :** arrêtez le minage et quittez le logiciel. Conservez vos fichiers `settings.json`, `fee-ledger.json` et votre dossier `kernels/`, puis remplacez l'EXE par la nouvelle version. N'écrasez pas vos paramètres avec la configuration initiale vierge.
+
+</details>
+
+<details>
+<summary><strong>Réglage automatique par GPU</strong></summary>
+
+Démarrez le minage, sélectionnez les GPU dans Réglages GPU puis descendez au test automatique. Choisissez rendement ou hashrate, réglez le minimum de référence et le décalage maximal, puis démarrez. Utilisez un seul programme de réglage.
+
+Par défaut, le test conserve 90 % du hashrate de référence et limite le décalage à +180 MHz. Chaque essai chauffe pendant 60 s et mesure pendant 180 s ; le candidat est validé pendant 10 min. Les cartes sont testées successivement. Les profils validés sont enregistrés et restent appliqués. L'option existante d'application au lancement contrôle les démarrages suivants.
+
+Le test ne relève pas la puissance maximale présente au départ. Il explore les décalages pris en charge, la puissance et les combinaisons proches. Sans décalage compatible, seule la puissance est testée. La mémoire conserve ses réglages de référence ; la tension reste inchangée. Annulation, surchauffe, perte de GPU ou erreur déclenchent une restauration ; si elle échoue, le mineur du logiciel est arrêté. Les parts sont validées au niveau du processus, sans preuve séparée pour chaque GPU.
+
+Le rendement utilise les TH/s/W du GPU ; la carte mère et les pertes d'alimentation influencent aussi le coût total. Les résultats concernent cet appareil, ce moteur et la plage testée. Refaites le test après un changement de moteur ou de pilote. Détails dans `logs/date/auto-tune-*/report.json`, conservés sept jours avec les journaux.
 
 </details>
 

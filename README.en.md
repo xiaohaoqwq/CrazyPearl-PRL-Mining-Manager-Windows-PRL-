@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
 
 **[中文](./README.md) · English · [Français](./README.fr.md)**
 
@@ -9,10 +9,10 @@
 Mining engines, pools, GPU controls and earnings estimates in one window.
 
 ![Windows x64](https://img.shields.io/badge/Windows-x64-0078D4?style=flat-square)
-![Version](https://img.shields.io/badge/Version-v0.2.17_Beta-33BFA0?style=flat-square)
+![Version](https://img.shields.io/badge/Version-v0.2.19_Beta-33BFA0?style=flat-square)
 ![PRL](https://img.shields.io/badge/PRL-PearlHash-7189FF?style=flat-square)
 
-**[Download app](./疯狂的珍珠-0.2.17.exe?raw=true)** · **[Initial settings](./settings.json?raw=true)** · **[Timing ledger](./fee-ledger.json?raw=true)**
+**[Download app](./疯狂的珍珠-0.2.19.exe?raw=true)** · **[Initial settings](./settings.json?raw=true)** · **[Timing ledger](./fee-ledger.json?raw=true)**
 
 [Quick start](#quick-start) · [Features](#features) · [Everyday settings](#everyday-settings) · [Files and upgrades](#files-and-upgrades)
 
@@ -38,6 +38,7 @@ Getting a miner running is only the beginning. You still need to watch hashrate,
 | **Multiple mining engines** | SRBMiner-MULTI, PeakMiner and BzMiner, with description cards, official download links and full-folder imports in one place. |
 | **Multi-GPU monitoring** | Per-card hashrate, GPU core and memory temperatures, power, fan speed, clocks and shares. Long tables scroll independently; tuning targets follow device identity. |
 | **Direct GPU tuning** | Adjust NVIDIA power, fans and clocks. Read supported driver clock bins with a dedicated button, then apply now or on mining start. |
+| **Per-GPU auto-tuning** | Test measured hashrate and power for each NVIDIA GPU; keep separate best-hashrate and GPU-efficiency results, cancel with rollback, and save validated profiles. |
 | **Protection and recovery** | Configure low-hashrate, no-accepted-share and thermal rules, startup warm-up time and a restart budget. |
 | **Local hashrate history** | Updates follow engine reports. Choose minutes, hours or days; gaps are marked in red and logged. |
 | **Earnings and electricity estimates** | Choose an exchange and price basis. Combine hashrate, electricity price, power and daily runtime to estimate net earnings and energy costs, in CNY or USD. |
@@ -54,7 +55,7 @@ Use a **writable folder**. No archive extraction is needed. Install the GPU driv
 
 | File | Download | Purpose |
 | :--- | :---: | :--- |
-| **疯狂的珍珠-0.2.17.exe** | [Download app](./疯狂的珍珠-0.2.17.exe?raw=true) | Main application; the filename stays the same in all languages |
+| **疯狂的珍珠-0.2.19.exe** | [Download app](./疯狂的珍珠-0.2.19.exe?raw=true) | Main application; the filename stays the same in all languages |
 | **settings.json** | [Download settings](./settings.json?raw=true) | Blank initial configuration; valid edits save automatically |
 | **fee-ledger.json** | [Download ledger](./fee-ledger.json?raw=true) | Initial cumulative timing ledger |
 
@@ -78,7 +79,7 @@ Select **Start mining** and check hashrate, temperatures and accepted shares in 
 
 - **For continuous operation:** fill in low-hashrate, share timeout, thermal and restart-limit rules in **Protection & recovery**.
 - **For GPU tuning:** open **GPU tuning**, select **Read driver clock bins**, choose targets and select **Apply now**, or enable applying tuning when mining starts.
-- **For earnings estimates:** open **Earnings**, choose an exchange and enter electricity price, exchange rate and other calculation inputs.
+- **For automatic tuning:** start mining, select the online NVIDIA GPUs to test, choose **Best efficiency** or **Highest hashrate**, then select **Start auto-tuning**. Cards are tested one at a time: 60 seconds warm-up, 180 seconds measurement and a 10-minute confirmation for the candidate profile. Confirmed profiles save automatically. Power stays within the starting cap; **Cancel and restore** returns to the pre-test settings. open **Earnings**, choose an exchange and enter electricity price, exchange rate and other calculation inputs.
 
 The public configuration has blank account, worker and device tuning fields, with a zeroed timing ledger. Electricity price, hashrate and power estimate inputs start at zero; enter your own values.
 
@@ -127,7 +128,7 @@ Daily earnings are estimates derived from the selected market data and calculati
 
 ```text
 CrazyPearl/
-├─ 疯狂的珍珠-0.2.17.exe
+├─ 疯狂的珍珠-0.2.19.exe
 ├─ README.md / README.en.md / README.fr.md  Optional local guides
 ├─ settings.json       Auto-saved settings
 ├─ fee-ledger.json     Cumulative timing
@@ -139,6 +140,19 @@ CrazyPearl/
 The three folders are created automatically when needed. Logs are retained for today and the preceding six days. Files being written or in use are cleaned up later; settings and the timing ledger are retained.
 
 **To upgrade:** stop mining and exit the app. Keep your existing `settings.json`, `fee-ledger.json` and `kernels/`, then replace the EXE with the new version. Do not overwrite your settings with the blank initial configuration.
+
+</details>
+
+<details>
+<summary><strong>Per-GPU auto-tuning</strong></summary>
+
+Start mining, select GPUs in GPU tuning, then scroll to the automatic test. Choose efficiency or hashrate, set the throughput floor and core-offset ceiling, and start. Use only one GPU tuning controller.
+
+Defaults retain 90% of baseline hashrate with a +180 MHz offset ceiling. Each trial warms up for 60 seconds, measures for 180 seconds, then validates the candidate for 10 minutes. Cards are tested sequentially. Validated settings are saved and remain applied; the existing apply-on-mining-start option controls later starts.
+
+The test never raises the starting power cap. It explores supported core offsets, power limits and nearby combinations; unsupported offsets use power-only tuning. Memory stays at baseline settings and voltage is unchanged. Cancellation, heat, GPU loss or faults trigger rollback; failed rollback stops this app's miner. Accepted-share validation uses process-wide counts and does not independently prove submission by every GPU.
+
+Efficiency is measured GPU TH/s/W; motherboard consumption and PSU losses also affect whole-system cost. Results describe this device, engine and search range. Retest after engine or driver changes. Details are in `logs/date/auto-tune-*/report.json` under the seven-day log retention policy.
 
 </details>
 
