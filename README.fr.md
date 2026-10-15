@@ -2,43 +2,64 @@
 
 **[中文](./README.md) · [English](./README.en.md) · Français**
 
-# CrazyPearl
+# CrazyPearl · Surfréquence automatique et minage PRL économe
 
-### Le minage de PRL sous Windows, plus simple à configurer et à suivre
+### Trouvez la plage efficace de chaque GPU. Plus de hashrate par watt.
 
-Moteurs, pools, réglages GPU et estimation des revenus dans une seule fenêtre.
+Test du décalage du cœur et de la limite de puissance, carte par carte, pour rechercher un meilleur rendement énergétique.
 
 ![Windows x64](https://img.shields.io/badge/Windows-x64-0078D4?style=flat-square)
 ![Version](https://img.shields.io/badge/Version-v0.2.19_Bêta-33BFA0?style=flat-square)
 ![PRL](https://img.shields.io/badge/PRL-PearlHash-7189FF?style=flat-square)
 
-**[Télécharger le logiciel](./疯狂的珍珠-0.2.19.exe?raw=true)** · **[Configuration initiale](./settings.json?raw=true)** · **[Compteur de temps](./fee-ledger.json?raw=true)**
+**[Télécharger le logiciel](./疯狂的珍珠-0.2.19.exe?raw=true)** · **[Configuration initiale](./settings.json?raw=true)** · **[Registre des parts](./fee-ledger.json?raw=true)**
 
-[Démarrage rapide](#démarrage-rapide) · [Fonctionnalités](#fonctionnalités) · [Réglages courants](#réglages-courants) · [Fichiers et mises à jour](#fichiers-et-mises-à-jour)
+[Résultats mesurés](#résultats-dun-test-de-réglage) · [Démarrage rapide](#démarrage-rapide) · [Fonctionnalités](#fonctionnalités) · [Réglages courants](#réglages-courants) · [Fichiers et mises à jour](#fichiers-et-mises-à-jour)
 
 </div>
 
 ---
 
-Lancer un moteur ne suffit pas : il faut aussi suivre le hashrate, repérer les déconnexions et surveiller les températures. **CrazyPearl réunit ces tâches quotidiennes.** Choisissez un moteur, renseignez votre adresse de paiement et votre pool, puis gérez votre machine depuis la même interface. Les paramètres valides sont enregistrés automatiquement pour la prochaine session.
+**Avec les bons paramètres, un même GPU peut parfois maintenir ou augmenter son hashrate tout en consommant moins.** CrazyPearl automatise la recherche : mesure de référence, essais de décalage du cœur et de puissance, comparaison du hashrate et de la consommation, puis validation et enregistrement du profil. Chaque GPU NVIDIA est testé séparément pour tenir compte du modèle et des différences entre cartes.
+
+## Résultats d'un test de réglage
+
+Un test local de minage PRL sur RTX 5070 Ti :
+
+| Indicateur | Référence initiale | Profil de rendement validé | Évolution |
+| :--- | ---: | ---: | ---: |
+| **Puissance moyenne du GPU** | 279,82 W | **249,98 W** | **−10,7 %** |
+| **Hashrate local moyen** | 177,03 TH/s | **178,77 TH/s** | **+1,0 %** |
+| **Hashrate par watt du GPU** | 0,633 TH/s/W | **0,715 TH/s/W** | **+13,0 %** |
+
+**Environ 30 W de moins, avec un léger gain de hashrate lors de ce test.** Le profil utilise un décalage du cœur de +120 MHz et une limite de 250 W, contre 280 W pour la référence. Mesure initiale de 180 secondes, puis confirmation du profil pendant 600 secondes, avec 16 parts acceptées par le pool.
+
+<details>
+<summary>Conditions et méthode de mesure</summary>
+
+Cet exemple provient du test de réglage automatique de la version 0.2.18 ; la version actuelle 0.2.19 améliore la compatibilité multi-GPU. Moteur SRBMiner-MULTI 3.7.3, pilote NVIDIA 617.42, cible mémoire de 7001 MHz et ventilateurs à 100 % dans les deux configurations. Le hashrate est fourni par le moteur local et la puissance par le pilote. Le rendement est calculé à partir du hashrate et de l'énergie intégrés sur la période de mesure ; les pourcentages utilisent les valeurs non arrondies.
+
+Ces résultats concernent cette carte dans ces conditions. Les autres GPU, moteurs et environnements nécessitent leurs propres tests. La puissance GPU exclut la carte mère, le CPU et les pertes de l'alimentation ; ajoutez-les séparément dans le calcul des revenus pour estimer la consommation totale.
+
+</details>
 
 ## Pourquoi CrazyPearl ?
 
-| Voir chaque GPU | Gérer les interruptions | Régler à partir des données du pilote |
+| Priorité au hashrate par watt | Un profil par GPU | Une machine suivie en continu |
 | :--- | :--- | :--- |
-| Consultez le hashrate total et celui de chaque carte pour repérer une baisse de performance ou une température élevée. | Définissez des règles en cas de hashrate faible, d'absence de parts acceptées ou de surchauffe, avec une limite de redémarrages. | Lisez les paliers de fréquence proposés par le pilote avant de choisir les cibles. Puissance, ventilation et fréquences sont regroupées. |
+| Choisissez le meilleur rendement en conservant le minimum de hashrate fixé, ou privilégiez le hashrate maximal. | Mesurez et enregistrez les paramètres de chaque carte, sans recopier le profil d'un GPU sur toute la machine. | Confirmation de 10 minutes, annulation avec restauration, protection thermique, reprise automatique et enregistrement des paramètres. |
 
-**Moins de fenêtres et de scripts à gérer. Un suivi plus clair de votre machine.**
+Surfréquence du cœur et limites de puissance sont testées ensemble. La recherche ne dépasse pas la limite de puissance initiale. Si le pilote ne prend pas en charge le décalage du cœur, seuls les réglages de puissance sont testés.
 
 ## Fonctionnalités
 
 | Fonction | Utilité |
 | :--- | :--- |
+| **Réglage automatique par GPU** | Test du hashrate et de la puissance de chaque GPU NVIDIA, résultats distincts pour hashrate et rendement, annulation avec restauration et profils validés enregistrés. |
 | **Interface en trois langues** | Choisissez 中文, English ou Français en haut à droite. Le choix s'applique immédiatement et s'enregistre sans modifier les saisies ni la session de minage. |
 | **Plusieurs moteurs** | SRBMiner-MULTI, PeakMiner et BzMiner : fiches descriptives, téléchargement officiel et importation de dossiers complets au même endroit. |
 | **Suivi multi-GPU** | Hashrate, températures du cœur et de la mémoire, puissance, ventilation, fréquences et parts par carte. Les longs tableaux défilent indépendamment ; les réglages suivent l'identité du GPU. |
 | **Réglages GPU directs** | Puissance, ventilation et fréquences des GPU NVIDIA. Un bouton dédié lit les paliers du pilote ; appliquez les cibles immédiatement ou au lancement du minage. |
-| **Réglage automatique par GPU** | Test du hashrate et de la puissance de chaque GPU NVIDIA, résultats distincts pour hashrate et rendement, annulation avec restauration et profils validés enregistrés. |
 | **Protection et reprise** | Règles de hashrate faible, délai sans part acceptée et protection thermique, avec période de chauffe et limite de redémarrages. |
 | **Historique local du hashrate** | Mise à jour à chaque rapport du moteur. Échelle en minutes, heures ou jours ; les interruptions sont marquées en rouge et consignées. |
 | **Revenus et coût électrique** | Choisissez une plateforme et une référence de prix. Combinez hashrate, tarif électrique, puissance et durée quotidienne pour estimer le revenu net et le coût énergétique en CNY ou USD. |

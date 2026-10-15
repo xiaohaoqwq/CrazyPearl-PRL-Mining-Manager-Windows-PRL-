@@ -2,43 +2,64 @@
 
 **[中文](./README.md) · English · [Français](./README.fr.md)**
 
-# CrazyPearl
+# CrazyPearl · PRL Auto-Overclocking & Efficient Mining
 
-### PRL mining on Windows, with less setup and less babysitting
+### Find your GPU's efficient range. Get more hashrate from every watt.
 
-Mining engines, pools, GPU controls and earnings estimates in one window.
+Per-GPU core-offset and power testing, built to find lower-power, higher-efficiency mining settings.
 
 ![Windows x64](https://img.shields.io/badge/Windows-x64-0078D4?style=flat-square)
 ![Version](https://img.shields.io/badge/Version-v0.2.19_Beta-33BFA0?style=flat-square)
 ![PRL](https://img.shields.io/badge/PRL-PearlHash-7189FF?style=flat-square)
 
-**[Download app](./疯狂的珍珠-0.2.19.exe?raw=true)** · **[Initial settings](./settings.json?raw=true)** · **[Timing ledger](./fee-ledger.json?raw=true)**
+**[Download app](./疯狂的珍珠-0.2.19.exe?raw=true)** · **[Initial settings](./settings.json?raw=true)** · **[Share ledger](./fee-ledger.json?raw=true)**
 
-[Quick start](#quick-start) · [Features](#features) · [Everyday settings](#everyday-settings) · [Files and upgrades](#files-and-upgrades)
+[Measured results](#what-one-tuning-run-achieved) · [Quick start](#quick-start) · [Features](#features) · [Everyday settings](#everyday-settings) · [Files and upgrades](#files-and-upgrades)
 
 </div>
 
 ---
 
-Getting a miner running is only the beginning. You still need to watch hashrate, track disconnections and check temperatures. **CrazyPearl brings those everyday tasks together.** Choose an engine, enter your payout details and pool, and manage your rig from one place. Valid settings save automatically for the next session.
+**The same GPU can sometimes deliver similar or higher hashrate while drawing less power—with the right settings.** CrazyPearl automates the search: measure a baseline, test core overclock offsets and power limits, score measured hashrate against power, then validate and save a profile. Each NVIDIA GPU gets its own test, accounting for different models and individual silicon.
+
+## What one tuning run achieved
+
+A local PRL test with an RTX 5070 Ti:
+
+| Metric | Before: baseline | Validated efficiency profile | Change |
+| :--- | ---: | ---: | ---: |
+| **Average GPU power** | 279.82 W | **249.98 W** | **10.7% lower** |
+| **Average local hashrate** | 177.03 TH/s | **178.77 TH/s** | **1.0% higher** |
+| **GPU hashrate per watt** | 0.633 TH/s/W | **0.715 TH/s/W** | **13.0% higher** |
+
+**About 30W less GPU power, with a small hashrate gain in this test.** The profile used a +120 MHz core offset and a 250W power cap; the baseline cap was 280W. The baseline measurement lasted 180 seconds. The candidate completed a 600-second confirmation, with 16 shares accepted by the pool.
+
+<details>
+<summary>Test conditions and measurement basis</summary>
+
+This example comes from the 0.2.18 auto-tuning test; the current 0.2.19 adds multi-GPU compatibility improvements. SRBMiner-MULTI 3.7.3, NVIDIA driver 617.42, memory target 7001 MHz and fans at 100% in both configurations. Hashrate comes from local engine reports; power comes from driver readings. Efficiency is calculated from integrated hashrate and energy over the measurement window. Percentages use unrounded values.
+
+Results describe this card under these conditions. Test other GPUs, engines and environments independently. GPU power excludes the motherboard, CPU and PSU conversion losses; add those separately in the earnings calculator for whole-system estimates.
+
+</details>
 
 ## Why CrazyPearl?
 
-| See every GPU | Recover from interruptions | Tune with driver data |
+| Put hashrate per watt first | Tune each physical GPU | Keep the rig running |
 | :--- | :--- | :--- |
-| View total hashrate alongside individual cards. Find the card losing speed or running hot. | Set rules for low hashrate, missing accepted shares and high temperatures, with a restart limit. | Read the driver's supported clock bins before choosing targets. Manage power, fans and clocks together. |
+| Choose best efficiency to compare power while retaining your minimum baseline hashrate, or choose highest hashrate when throughput is the priority. | Measure and save profiles per card instead of applying one GPU's settings across the entire rig. | Candidates get a 10-minute confirmation. Cancel with rollback, use thermal and recovery rules, and keep settings saved automatically. |
 
-**Fewer windows and scripts to juggle. A clearer view of your rig.**
+Core overclocking and power limits are tested together. The search never raises the starting power cap. If the driver lacks core-offset support, it tests power settings only.
 
 ## Features
 
 | Feature | What it does |
 | :--- | :--- |
+| **Per-GPU auto-tuning** | Test measured hashrate and power for each NVIDIA GPU; keep separate best-hashrate and GPU-efficiency results, cancel with rollback, and save validated profiles. |
 | **Three interface languages** | Choose 中文, English or Français at the top right. Changes apply immediately and save automatically, without changing your inputs or mining session. |
 | **Multiple mining engines** | SRBMiner-MULTI, PeakMiner and BzMiner, with description cards, official download links and full-folder imports in one place. |
 | **Multi-GPU monitoring** | Per-card hashrate, GPU core and memory temperatures, power, fan speed, clocks and shares. Long tables scroll independently; tuning targets follow device identity. |
 | **Direct GPU tuning** | Adjust NVIDIA power, fans and clocks. Read supported driver clock bins with a dedicated button, then apply now or on mining start. |
-| **Per-GPU auto-tuning** | Test measured hashrate and power for each NVIDIA GPU; keep separate best-hashrate and GPU-efficiency results, cancel with rollback, and save validated profiles. |
 | **Protection and recovery** | Configure low-hashrate, no-accepted-share and thermal rules, startup warm-up time and a restart budget. |
 | **Local hashrate history** | Updates follow engine reports. Choose minutes, hours or days; gaps are marked in red and logged. |
 | **Earnings and electricity estimates** | Choose an exchange and price basis. Combine hashrate, electricity price, power and daily runtime to estimate net earnings and energy costs, in CNY or USD. |
@@ -57,7 +78,7 @@ Use a **writable folder**. No archive extraction is needed. Install the GPU driv
 | :--- | :---: | :--- |
 | **疯狂的珍珠-0.2.19.exe** | [Download app](./疯狂的珍珠-0.2.19.exe?raw=true) | Main application; the filename stays the same in all languages |
 | **settings.json** | [Download settings](./settings.json?raw=true) | Blank initial configuration; valid edits save automatically |
-| **fee-ledger.json** | [Download ledger](./fee-ledger.json?raw=true) | Initial cumulative timing ledger |
+| **fee-ledger.json** | [Download ledger](./fee-ledger.json?raw=true) | Initial share ledger ledger |
 
 You can also open each repository file and select **Download raw file**. Save this README for offline reference if needed.
 
@@ -81,7 +102,7 @@ Select **Start mining** and check hashrate, temperatures and accepted shares in 
 - **For GPU tuning:** open **GPU tuning**, select **Read driver clock bins**, choose targets and select **Apply now**, or enable applying tuning when mining starts.
 - **For automatic tuning:** start mining, select the online NVIDIA GPUs to test, choose **Best efficiency** or **Highest hashrate**, then select **Start auto-tuning**. Cards are tested one at a time: 60 seconds warm-up, 180 seconds measurement and a 10-minute confirmation for the candidate profile. Confirmed profiles save automatically. Power stays within the starting cap; **Cancel and restore** returns to the pre-test settings. open **Earnings**, choose an exchange and enter electricity price, exchange rate and other calculation inputs.
 
-The public configuration has blank account, worker and device tuning fields, with a zeroed timing ledger. Electricity price, hashrate and power estimate inputs start at zero; enter your own values.
+The public configuration has blank account, worker and device tuning fields, with a zeroed share ledger. Electricity price, hashrate and power estimate inputs start at zero; enter your own values.
 
 ## Everyday settings
 
