@@ -171,7 +171,7 @@ Démarrez le minage, sélectionnez les GPU dans Réglages GPU puis descendez au 
 
 Par défaut, le test conserve 90 % du hashrate de référence et limite le décalage à +180 MHz. Chaque essai chauffe pendant 60 s et mesure pendant 180 s ; le candidat est validé pendant 10 min. Les cartes sont testées successivement. Les profils validés sont enregistrés et restent appliqués. L'option existante d'application au lancement contrôle les démarrages suivants.
 
-Le test ne relève pas la puissance maximale présente au départ. Il explore les décalages pris en charge, la puissance et les combinaisons proches. Sans décalage compatible, seule la puissance est testée. La mémoire conserve ses réglages de référence ; la tension reste inchangée. Annulation, surchauffe, perte de GPU ou erreur déclenchent une restauration ; si elle échoue, le mineur du logiciel est arrêté. Les parts sont validées au niveau du processus, sans preuve séparée pour chaque GPU.
+Le test ne relève pas la puissance maximale présente au départ. Il explore les décalages pris en charge, la puissance et les combinaisons proches. Sans décalage compatible, seule la puissance est testée. La mémoire conserve ses réglages de référence ; la tension reste inchangée. Annulation, surchauffe, perte de GPU ou erreur déclenchent une restauration ; si elle échoue, le mineur du logiciel est arrêté.
 
 Le rendement utilise les TH/s/W du GPU ; la carte mère et les pertes d'alimentation influencent aussi le coût total. Les résultats concernent cet appareil, ce moteur et la plage testée. Refaites le test après un changement de moteur ou de pilote. Détails dans `logs/date/auto-tune-*/report.json`, conservés sept jours avec les journaux.
 
@@ -180,8 +180,6 @@ Le rendement utilise les TH/s/W du GPU ; la carte mère et les pertes d'alimenta
 ---
 
 Frais en parts : environ 0,2 % ; frais du moteur en sus.
-
-Les frais sont calculés sur le nombre de parts acceptées par le pool : 998 parts utilisateur acceptées déclenchent un lot visant deux parts développeur acceptées. La difficulté peut varier ; il ne s'agit donc pas d'un pourcentage fixe des revenus.
 
 Ce dépôt distribue une application Windows x64. Il ne contient ni code source, ni pilote graphique, ni moteur tiers. Les moteurs sont publiés par leurs auteurs respectifs ; le logiciel fournit des liens de téléchargement officiels. L'application vérifie l'intégrité de sa version publiée. Téléchargez les fichiers d'origine depuis ce dépôt.
 

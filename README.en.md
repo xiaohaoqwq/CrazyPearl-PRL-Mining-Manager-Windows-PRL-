@@ -171,7 +171,7 @@ Start mining, select GPUs in GPU tuning, then scroll to the automatic test. Choo
 
 Defaults retain 90% of baseline hashrate with a +180 MHz offset ceiling. Each trial warms up for 60 seconds, measures for 180 seconds, then validates the candidate for 10 minutes. Cards are tested sequentially. Validated settings are saved and remain applied; the existing apply-on-mining-start option controls later starts.
 
-The test never raises the starting power cap. It explores supported core offsets, power limits and nearby combinations; unsupported offsets use power-only tuning. Memory stays at baseline settings and voltage is unchanged. Cancellation, heat, GPU loss or faults trigger rollback; failed rollback stops this app's miner. Accepted-share validation uses process-wide counts and does not independently prove submission by every GPU.
+The test never raises the starting power cap. It explores supported core offsets, power limits and nearby combinations; unsupported offsets use power-only tuning. Memory stays at baseline settings and voltage is unchanged. Cancellation, heat, GPU loss or faults trigger rollback; failed rollback stops this app's miner.
 
 Efficiency is measured GPU TH/s/W; motherboard consumption and PSU losses also affect whole-system cost. Results describe this device, engine and search range. Retest after engine or driver changes. Details are in `logs/date/auto-tune-*/report.json` under the seven-day log retention policy.
 
@@ -180,8 +180,6 @@ Efficiency is measured GPU TH/s/W; motherboard consumption and PSU losses also a
 ---
 
 Software share fee: about 0.2%; engine fees are separate.
-
-Fees are based on pool-accepted share counts: 998 accepted user shares trigger a batch targeting two accepted author shares. Share difficulty can vary, so this is not a fixed percentage of earnings.
 
 This repository distributes a Windows x64 application. Source code, GPU drivers and third-party mining engines are not included. Engines are published by their respective authors; the app provides official download entry points. The app includes publisher integrity verification. Download the original files from this repository.
 
